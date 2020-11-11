@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const withCredentials = (url) => {
-    return `${url}client_id=${process.env.REACT_APP_CLIENT_ID}&client_sicret=${process.env.REACT_APP_CLIENT_SICRET}`
+    return `${url}api_key=${process.env.REACT_APP_CLIENT_KEY}`
 }
 
 export const request = async (method, url, body = null) => {
