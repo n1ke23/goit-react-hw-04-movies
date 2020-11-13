@@ -4,7 +4,7 @@ import { Switch, Route, NavLink, useRouteMatch } from 'react-router-dom'
 
 const Movies = () => {
   const match = useRouteMatch()
-  console.log(match);
+  // console.log(match);
   return (
     <>
       <ul>
