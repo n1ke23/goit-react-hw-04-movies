@@ -1,23 +1,32 @@
 import { lazy } from "react";
 
-export const options = [
+export const routes = [
     {
         path: "/",
-        label: "Home",
         exact: true,
-        component: lazy(
-            () => import("../Containers/Home/Home")),
+        component: lazy(() => import("./../Conteiners/Home/Home")),
     },
     {
         path: "/movies",
-        label: "Movies",
         exact: true,
-        component: lazy(() => import("../Containers/Movies/Movies")),
+        component: lazy(() => import("./../Conteiners/Movies/Movies")),
     },
     {
         path: "/movies/:id",
-        label: "SingleMovie",
         exact: false,
-        component: lazy(() => import("../Containers/Movies/Id/Id")),
+        component: lazy(() => import("./../Conteiners/Movies/Id/Id")),
     },
 ];
+export const navLinks = [
+    {
+        name: 'Home',
+        to: '/',
+        exact: true,
+    },
+    {
+        name: 'Movies',
+        to: '/movies',
+        exact: false,
+    }
+];
+
