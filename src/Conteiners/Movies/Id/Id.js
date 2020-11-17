@@ -1,21 +1,41 @@
-import React from 'react';
-import { Switch, Route, NavLink, useRouteMatch } from 'react-router-dom';
-
-// const match = useRouteMatch()
+import React, { useState, Suspense } from 'react';
+import { Switch, Route, NavLink, useHistory, useLocation, useParams } from 'react-router-dom';
+// import MoviesLink from './MoviesLinks/MoviesLinks';
+import { moviesRouts } from './../../../Options/Options'
+// import { useRouteMatch } from 'react-router-dom';
 
 const Id = () => {
+  // const match = useRouteMatch()
+  const history = useHistory();
+  const location = useLocation();
+  const [movie, setMovie] = useState([]);
+
+  const goBack = () => {
+    const { state } = location;
+    if (state && state.from) {
+      return history.push(state.from);
+    }
+    history.push("/");
+  };
   return (
-    <div>
-      <NavLink to={`${match.url}/cast`}>cast</NavLink>
-      <NavLink to={`${match.url}/reviev`}>reviev</NavLink>
+    <>
+      <button type="button" onClick={goBack}>
+        Go back
+      </button>
 
 
-      <Switch>
-        <Route path={`${match.url}/cast`} exact render={() => <h2>cast</h2>}></Route>
-        <Route path={`${match.url}/reviev`} exact render={() => <h2>reviev</h2>} ></Route>
+      {/* <MoviesLink /> */}
+      {/* <NavLink to={`/movies/${match.url}/cast`}>cast</NavLink>
+        <NavLink to={`/movies/${match.url}/reviev`}>reviev</NavLink> */}
+      <Suspense fallback={<h2>Load...</h2>}>
+        <Switch>
+          {moviesRouts.map((route) => (
+            <Route key={route.path} path={route.path} component={route.component} exact={route.exact ? true : false} />
+          ))}
 
-      </Switch>
-    </div>
+        </Switch>
+      </Suspense>
+    </>
   );
 };
 

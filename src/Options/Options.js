@@ -1,5 +1,18 @@
 import { lazy } from "react";
-
+// import { useRouteMatch } from 'react-router-dom';
+// const match = useRouteMatch()
+export const navLinks = [
+    {
+        name: 'Home',
+        to: '/',
+        exact: true,
+    },
+    {
+        name: 'Movies',
+        to: '/movies',
+        exact: false,
+    }
+];
 export const routes = [
     {
         path: "/",
@@ -17,16 +30,29 @@ export const routes = [
         component: lazy(() => import("./../Conteiners/Movies/Id/Id")),
     },
 ];
-export const navLinks = [
+// export const moviesLinks = [
+//     {
+//         name: 'Cast',
+//         to: `/movies/${match.url}/cast`,
+//         exact: true,
+//     },
+//     {
+//         name: 'Reviev',
+//         to: `/movies/${match.url}/reviev`,
+//         exact: false,
+//     }
+
+// ];
+export const moviesRouts = [
     {
-        name: 'Home',
-        to: '/',
+        path: `/movies/:id/cast`,
         exact: true,
+        component: lazy(() => import("./../Conteiners/Movies/Id/Cast/Cast")),
     },
     {
-        name: 'Movies',
-        to: '/movies',
-        exact: false,
-    }
-];
+        path: `/movies/:id/reviev`,
+        exact: true,
+        component: lazy(() => import("./../Conteiners/Movies/Id/Reviev/Reviev")),
+    },
+]
 

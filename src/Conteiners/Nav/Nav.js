@@ -6,7 +6,7 @@ const Movies = () => {
   return (
     <>
       <ul>
-        {navLinks.map(link => <li><NavLink exact={link.exact ? true : false} to={link.to}>{link.name}</NavLink></li>)}
+        {navLinks.map(link => (<li><NavLink exact={link.exact ? true : false} to={link.to}>{link.name}</NavLink></li>))}
       </ul>
     </>
   );
