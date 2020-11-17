@@ -6,10 +6,11 @@ export const withCredentials = (url) => {
 
 export const request = async (method, url, body = null) => {
     const result = await axios[method](url, body);
-    return result;
+    return result.data;
 }
-export const getMoviesQuery = async (query) => {
-    const url = `search/movie?query=${query}&api_key=${process.env.REACT_APP_API_KEY}`;
-    const result = await axios.get(url);
-    return result;
+export const getMoviesQuery = (query) => {
+    return withCredentials(`https://api.themoviedb.org/3/search/movie?query=${query}&`);
 };
+export const searchFilm = (id) => {
+    return withCredentials(`https://api.themoviedb.org/3/movie/${id}?`)
+}

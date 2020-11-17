@@ -7,22 +7,25 @@ const Home = () => {
 
     useEffect(() => {
         (async () => {
-            const url = withCredentials("https://api.themoviedb.org/3/trending/all/day?")
-            const data = await request('get', url).then(data => setArrayFilms(data.data.results));
+            const url = withCredentials("https://api.themoviedb.org/3/trending/movie/day?")
+            await request('get', url).then(data => setArrayFilms(data.results));
 
         })();
     }, []);
+
     console.log(arrayFilms)
+
     return (
         <>
             <h1>home</h1>
             <ul>
-                {arrayFilms.map(movie => (
+                {!!arrayFilms.length && arrayFilms.map(movie => (
                     <li key={movie.id}>
-                        <NavLink to={`/movies/${movie.id}`}  >
+                        <NavLink to={`/movies/${movie.id}`}  {...movie}>
                             {movie.title || movie.name}
                         </NavLink>
                     </li>
+                    
                 ))}
             </ul>
         </>

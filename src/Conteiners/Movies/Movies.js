@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import queryString from 'query-string';
-import { withCredentials, request } from './../../helpers/request'
+import { getMoviesQuery, request } from './../../helpers/request'
+import { createGlobalStyle } from 'styled-components';
 
 const Movies = () => {
   const [query, setQuery] = useState('');
@@ -10,28 +11,45 @@ const Movies = () => {
   const location = useLocation();
   const search = queryString.parse(location.search);
   const history = useHistory();
+  console.log(search);
+  console.log(location);
+
   useEffect(() => {
-    const url = withCredentials(search)
-    request('get', url).then(res => {
-      if (res.data.results.length) {
-        setMovies(res.data.results);
+    if(location.query){
+
+    
+    const url = getMoviesQuery(location.query)
+    setQuery(location.query)
+    request('get', url)
+    .then(res => {
+      console.log(res)
+      if (res.results.length) {
+        setMovies(res.results);
       } else {
         setNotice("Sorry, we can't find anything for your request");
       }
-    })
-      .catch(error => setNotice(error.response.data.status_message));
-  }, [search.query]);
+    }) }
+  }, []);
 
   const handleChange = ({ target: { value } }) => {
     setQuery(value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    const url = getMoviesQuery(query)
+    request('get', url)
+    .then(res => {
+      if (res.results.length) {
+        setMovies(res.results);
+      } else {
+        setNotice("Sorry, we can't find anything for your request");
+      }
+    }) 
     history.push({
-      ...location,
+      pathname: location.pathname,
       search: `?query=${query}`,
+      query
     });
-    setQuery('');
   };
 
   // console.log(match);
@@ -55,7 +73,7 @@ const Movies = () => {
             <Link
               to={{
                 pathname: `/movies/${movie.id}`,
-                state: { from: location }
+                state: { from: location.pathname, search: query }
               }}>
               {movie.title || movie.name}
             </Link>
