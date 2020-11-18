@@ -30,19 +30,7 @@ export const routes = [
         component: lazy(() => import("./../Conteiners/Movies/Id/Id")),
     },
 ];
-// export const moviesLinks = [
-//     {
-//         name: 'Cast',
-//         to: `/movies/${match.url}/cast`,
-//         exact: true,
-//     },
-//     {
-//         name: 'Reviev',
-//         to: `/movies/${match.url}/reviev`,
-//         exact: false,
-//     }
 
-// ];
 export const moviesRouts = [
     {
         path: `/movies/:id/cast`,

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Switch, Route, NavLink, useRouteMatch } from 'react-router-dom'
 import { navLinks } from './../../Options/Options'
+import './Nav.css'
 
 const Movies = () => {
   return (
     <>
-      <ul>
+      <ul className='header-nav'>
         {navLinks.map(link => (<li><NavLink exact={link.exact ? true : false} to={link.to}>{link.name}</NavLink></li>))}
       </ul>
     </>

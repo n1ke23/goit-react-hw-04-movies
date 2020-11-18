@@ -1,9 +1,10 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { Switch, Route, NavLink, useHistory, useLocation, useParams } from 'react-router-dom';
-// import MoviesLink from './MoviesLinks/MoviesLinks';
+import MoviesLink from './MoviesLinks/MoviesLinks';
 import { moviesRouts } from './../../../Options/Options'
 // import { useRouteMatch } from 'react-router-dom';
 import {searchFilm, request} from './../../../helpers/request'
+import './Id.css'
 
 const Id = () => {
   // const match = useRouteMatch()
@@ -15,7 +16,11 @@ const Id = () => {
   console.log(id);
   useEffect(() => {
     console.log(location);
-    setSearch(location.state.search)
+    if(location.state){
+      setSearch(location.state.search)
+    } else {
+      setSearch('')
+    }
     const url = searchFilm(id)
     request('get', url).then(res=>setFilm(res))
   }, [])
@@ -28,18 +33,19 @@ console.log(film);
       search:`query=${search}`,
       query: search
     });
+    } else {
+      history.push("/");
     }
-    history.push("/");
   };
   return (
     <>
       <button type="button" onClick={goBack}>
         Go back
       </button>
-      <div >            
+      <div className='movie-flex'>            
             {film.id && (<div>
                 <div >
-                    <img src={`https://image.tmdb.org/t/p/w500${film.poster_path}`} alt={film.title} />
+                    {!!film.poster_path && <img src={`https://image.tmdb.org/t/p/w500${film.poster_path}`} alt={film.title} />}
                 </div>
                 <div>
                     <h1 >{film.title}</h1>
@@ -54,9 +60,12 @@ console.log(film);
                 </div>
             </div>)}
             </div>
-      {/* <MoviesLink /> */}
-      {/* <NavLink to={`/movies/${match.url}/cast`}>cast</NavLink>
-        <NavLink to={`/movies/${match.url}/reviev`}>reviev</NavLink> */}
+      
+      <MoviesLink id={film.id}/>
+      {/*<ul>
+         <li><NavLink to={`/movies/${film.id}/cast`}>cast</NavLink></li>
+        <li><NavLink to={`/movies/${film.id}/reviev`}>reviev</NavLink></li> 
+      </ul>*/}
       <Suspense fallback={<h2>Load...</h2>}>
         <Switch>
           {moviesRouts.map((route) => (

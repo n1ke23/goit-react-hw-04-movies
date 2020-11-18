@@ -1,18 +1,18 @@
-// import React from 'react';
-// import { Switch, Route, NavLink, useLocation, useRouteMatch } from 'react-router-dom';
-// import { moviesLinks } from './../../../../Options/Options'
+import React from 'react';
+import { Switch, Route, NavLink, useLocation, useRouteMatch } from 'react-router-dom';
+import { moviesLinks } from './../../../../Options/moviesLinks'
 
 
-// const MoviesLink = () => {
-//     const match = useRouteMatch()
-//     return (
-//         <div>
-//             <ul>
-//                 {moviesLinks.map(link => (<li key={link.to}><NavLink exact={link.exact ? true : false} to={link.to}>{link.name}</NavLink></li>))}
+const MoviesLink = ({id}) => {
+    const match = useRouteMatch()
+    return (
+        <>
+            <ul>
+                {moviesLinks.map(link => (<li key={id}><NavLink exact={link.exact ? true : false} to={`/movies/${id}${link.to}`}>{link.name}</NavLink></li>))}
 
-//             </ul>
-//         </div >
-//     );
-// };
+            </ul>
+        </ >
+    );
+};
 
-// export default MoviesLink;
+export default MoviesLink;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom'
 import { withCredentials, request } from "./../../helpers/request"
+import './Home.css'
 
 const Home = () => {
     const [arrayFilms, setArrayFilms] = useState([])
@@ -17,7 +18,7 @@ const Home = () => {
 
     return (
         <>
-            <h1>home</h1>
+            <h1 className='home-title'>Trending today</h1>
             <ul>
                 {!!arrayFilms.length && arrayFilms.map(movie => (
                     <li key={movie.id}>
