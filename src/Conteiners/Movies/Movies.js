@@ -52,7 +52,7 @@ const Movies = () => {
     });
   };
 
-  // console.log(match);
+   console.log(movies)
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -66,7 +66,6 @@ const Movies = () => {
 
         <button type="submit">Search</button>
       </form>
-
       <ul>
         {movies.map(movie => (
           <li key={movie.id}>

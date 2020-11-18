@@ -9,33 +9,33 @@ import './Id.css'
 const Id = () => {
   // const match = useRouteMatch()
   const history = useHistory();
-  const[film, setFilm] = useState({})
-  const[search, setSearch] = useState('')
+  const [from, setFrom] = useState('');
+  const[film, setFilm] = useState({});
+  const[search, setSearch] = useState('');
   const location = useLocation();
-  const id = useParams().id
+  const id = useParams().id;
   console.log(id);
   useEffect(() => {
-    console.log(location);
+
     if(location.state){
       setSearch(location.state.search)
+      setFrom(location.state.from)
     } else {
       setSearch('')
     }
     const url = searchFilm(id)
     request('get', url).then(res=>setFilm(res))
   }, [])
-console.log(film);
+
   const goBack = () => {
-    const { state } = location;
-    if (state && state.from) {
-      return history.push({
-      pathname: state.from,
-      search:`query=${search}`,
-      query: search
-    });
-    } else {
-      history.push("/");
-    }
+    if ( from){
+        return history.push({
+        pathname: from,
+        search:`query=${search}`,
+        query: search
+      });
+    } else history.push("/");
+    
   };
   return (
     <>
