@@ -14,8 +14,6 @@ const Movies = () => {
 
   useEffect(() => {
     if(location.query){
-
-    
     const url = getMoviesQuery(location.query)
     setQuery(location.query)
     request('get', url)
@@ -31,6 +29,7 @@ const Movies = () => {
   const handleChange = ({ target: { value } }) => {
     setQuery(value);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const url = getMoviesQuery(query)
@@ -64,7 +63,8 @@ const Movies = () => {
       </form>
       <ul>
         {movies.map(movie => (
-          <li key={uuidv4()}>
+          <li key={movie.id}>
+          
             <Link
               to={{
                 pathname: `/movies/${movie.id}`,

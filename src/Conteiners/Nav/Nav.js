@@ -8,7 +8,7 @@ const Movies = () => {
   return (
     <>
       <ul className='header-nav'>
-        {navLinks.map(link => (<li><NavLink key={uuidv4()} exact={link.exact ? true : false} to={link.to}>{link.name}</NavLink></li>))}
+        {navLinks.map(link => (<li key={uuidv4()}><NavLink exact={link.exact ? true : false} to={link.to}>{link.name}</NavLink></li>))}
       </ul>
     </>
   );
