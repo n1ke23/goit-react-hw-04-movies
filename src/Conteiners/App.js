@@ -6,6 +6,7 @@ import Nav from './Nav/Nav';
 // import Home from './Home/Home'
 // import Id from './Movies/Id/Id'
 import { routes } from "./../Options/Options";
+import { v4 as uuidv4 } from 'uuid';
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
       <Suspense fallback={<h2>Load...</h2>}>
         <Switch>
           {routes.map((route) => (
-            <Route key={route.path} path={route.path} component={route.component} exact={route.exact ? true : false} />
+            <Route key={uuidv4()} path={route.path} component={route.component} exact={route.exact ? true : false} />
           ))}
           <Redirect to='/' />
         </Switch>

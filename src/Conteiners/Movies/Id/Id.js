@@ -14,7 +14,6 @@ const Id = () => {
   const[search, setSearch] = useState('');
   const location = useLocation();
   const id = useParams().id;
-  console.log(id);
   useEffect(() => {
 
     if(location.state){

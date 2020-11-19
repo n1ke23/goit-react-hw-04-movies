@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 import { getMoviesQuery, request } from './../../helpers/request'
-import { createGlobalStyle } from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 
 const Movies = () => {
   const [query, setQuery] = useState('');
@@ -11,8 +11,6 @@ const Movies = () => {
   const location = useLocation();
   const search = queryString.parse(location.search);
   const history = useHistory();
-  console.log(search);
-  console.log(location);
 
   useEffect(() => {
     if(location.query){
@@ -22,7 +20,6 @@ const Movies = () => {
     setQuery(location.query)
     request('get', url)
     .then(res => {
-      console.log(res)
       if (res.results.length) {
         setMovies(res.results);
       } else {
@@ -52,7 +49,6 @@ const Movies = () => {
     });
   };
 
-   console.log(movies)
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -68,7 +64,7 @@ const Movies = () => {
       </form>
       <ul>
         {movies.map(movie => (
-          <li key={movie.id}>
+          <li key={uuidv4()}>
             <Link
               to={{
                 pathname: `/movies/${movie.id}`,

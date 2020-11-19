@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { fetchRevievs, request } from './../../../../helpers/request';
+import { v4 as uuidv4 } from 'uuid';
 
 const Revievs = () => {
     const [revievs, setRevievs] = useState([]);
@@ -18,7 +19,7 @@ const Revievs = () => {
             {(!!revievs.length && (
                 <ul>
                     {revievs.map(reviev => (
-                        <li key={reviev.id}>
+                        <li key={uuidv4()}>
                             <h3>Author: {reviev.author}</h3>
                             <p>{reviev.content}</p>
                         </li>

@@ -2,12 +2,13 @@ import React from 'react';
 import { Switch, Route, NavLink, useRouteMatch } from 'react-router-dom'
 import { navLinks } from './../../Options/Options'
 import './Nav.css'
+import { v4 as uuidv4 } from 'uuid';
 
 const Movies = () => {
   return (
     <>
       <ul className='header-nav'>
-        {navLinks.map(link => (<li><NavLink exact={link.exact ? true : false} to={link.to}>{link.name}</NavLink></li>))}
+        {navLinks.map(link => (<li><NavLink key={uuidv4()} exact={link.exact ? true : false} to={link.to}>{link.name}</NavLink></li>))}
       </ul>
     </>
   );
